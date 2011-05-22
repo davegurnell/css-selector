@@ -50,5 +50,6 @@ case class Sel(val inner: Selector) {
   def #>(fn: NodeSeq => NodeSeq): Trans = replace(fn)
   def #>(out: NodeSeq): Trans = replace(out)
   def #>(out: String): Trans = replace(out)
+  def #>(out: List[NodeSeq]): Trans = replace(out)
   
 }
