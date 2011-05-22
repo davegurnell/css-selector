@@ -13,12 +13,18 @@ Examples
 --------
     
     // Wider range of CSS selectors:
-    $("#nav li span") replace <foo/>    // replace selected noes with <foo/>
+    $("#nav li span") replace <foo/>    // replace selected nodes with <foo/>
+    
+    // Lift-style #> operator:
+    $("#nav li span") #> <foo/>         // replace selected nodes with <foo/>
+    
+    // Traversal operators:
+    $(".foo") children ".bar" remove    // remove children of .foo that match the selector .bar
     
     // 'remove' transformer:
     $("[deleteme]") remove              // remove nodes with an attr "deleteme"
     
-    // Conjunction transformer:
+    // Conjunction combinator:
     $("#name") replace "Dave" &         // replace with literal NodeSeq
     $("#age") replace (in => getAge)    // replace with NodeSeq => NodeSeq function
     
