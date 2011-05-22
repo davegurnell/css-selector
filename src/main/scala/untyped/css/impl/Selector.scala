@@ -1,4 +1,4 @@
-package untyped.css
+package untyped.css.impl
 
 import scala.xml._
 import org.fusesource.scalate.scuery._
