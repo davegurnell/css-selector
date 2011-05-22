@@ -3,7 +3,7 @@ CSS Selectors
 
 Alternative to Lift's [CSS selectors][CSS], based on Scalate's [Scuery][].
 
-There are two motivations for this code:
+There are several motivations for this code:
 
  - access to a wider range of combinators;
  - access to a wider range of selectors;
