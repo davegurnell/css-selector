@@ -7,13 +7,23 @@ class Project(info: ProjectInfo) extends DefaultProject(info) {
   val scalate = "org.fusesource.scalate" % "scalate-core" % "1.4.1"
   val scalatest = "org.scalatest" % "scalatest" % "1.3" % "test"
   
+  def optionOf[T](x: T) = {
+    val ans = if(x == null) None else Some(x)
+    println(ans)
+    ans
+  }
+
   val publishTo = {
-    val host = System.getenv("DEFAULT_REPO_HOST")
-    val path = System.getenv("DEFAULT_REPO_PATH")
-    val user = System.getenv("DEFAULT_REPO_USER")
-    val keyfile = new File(System.getenv("DEFAULT_REPO_KEYFILE"))
+    val option =
+      for {
+        host    <- optionOf(System.getenv("DEFAULT_REPO_HOST"))
+        path    <- optionOf(System.getenv("DEFAULT_REPO_PATH"))
+        user    <- optionOf(System.getenv("DEFAULT_REPO_USER"))
+        keypath <- optionOf(System.getenv("DEFAULT_REPO_KEYFILE"))
+        keyfile <- optionOf(new java.io.File(keypath))
+      } yield Resolver.sftp("Default Repo", host, path).as(user, keyfile)
     
-    Resolver.sftp("Default Repo", host, path).as(user, keyfile)
+    option.getOrElse(null.asInstanceOf[Resolver])
   }
   
 }
